@@ -92,6 +92,18 @@ with col_right:
             st.error(f"Batch prediction failed: {e}")
 
 
+# ---------- Diagnostics ----------
+st.subheader("🧪 Diagnostics")
+diag_cols = st.columns(2)
+if RESID_PLOT.exists():
+    with diag_cols[0]:
+        st.image(str(RESID_PLOT), caption="Residual Plot", use_container_width=True)
+if PVA_PLOT.exists():
+    with diag_cols[1]:
+        st.image(str(PVA_PLOT), caption="Predicted vs Actual", use_container_width=True)
+if not RESID_PLOT.exists() and not PVA_PLOT.exists():
+    st.caption("Train with the provided script to generate diagnostic plots automatically.")
+
 # ---------- Model Card ----------
 st.subheader("📄 Model Card")
 if CARD_PATH.exists():
